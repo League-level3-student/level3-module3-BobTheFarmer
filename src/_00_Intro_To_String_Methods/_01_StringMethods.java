@@ -1,6 +1,9 @@
 package _00_Intro_To_String_Methods;
 
+import java.util.ArrayList;
 import java.util.Base64;
+
+//WORKING ON THIS, DO NEXT PART ON LINE 82
 
 /*
  * Visit the JavaDocs for the String class to view everything you can do with a String.
@@ -34,13 +37,21 @@ public class _01_StringMethods {
 
     // Given Strings s1 and s2, return the longer String
     public static String longerString(String s1, String s2) {
-        return null;
+    		if(s1.length() > s2.length()) {
+    			return s1;
+    		} else if(s1.length() < s2.length()) {
+    			return s2;
+    		}
+        return "equal";
     }
 
     // If String s contains the word "underscores", change all of the spaces
     // to underscores
     public static String formatSpaces(String s) {
-        return null;
+    		if(s.contains("underscores")) {
+    			s = s.replace(' ', '_');
+    		}
+        return s;
     }
 
     // Return the name of the person whose LAST name would appear first if they
@@ -48,7 +59,24 @@ public class _01_StringMethods {
     // You cannot assume there are no extra spaces around the name, but you can
     // assume there is only one space between the first and last name
     public static String lineLeader(String s1, String s2, String s3) {
-        return null;
+    		ArrayList<String> names = new ArrayList<String>();
+    		ArrayList<Character> lastNames = new ArrayList<Character>();
+    		names.add(s1);
+    		names.add(s2);
+    		names.add(s3);
+    		
+    		int indexOfCurrentBest = 0;
+    		for (int i = 0; i < 3; i++) {
+    			names.set(i, names.get(i).trim());
+    			lastNames.add(names.get(i).charAt(names.get(i).length()-1));
+    			
+    			if(lastNames.get(i).compareTo((lastNames.get(indexOfCurrentBest))) < 0) {
+    				indexOfCurrentBest = i;
+    				System.out.println("Test");
+    			}
+		}
+    		System.out.println(lastNames);
+    		return names.get(indexOfCurrentBest);
     }
 
     // Return the sum of all numerical digits in the String
