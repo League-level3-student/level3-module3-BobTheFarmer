@@ -3,7 +3,7 @@ package _00_Intro_To_String_Methods;
 import java.util.ArrayList;
 import java.util.Base64;
 
-//WORKING ON THIS, DO NEXT PART ON LINE 82
+
 
 /*
  * Visit the JavaDocs for the String class to view everything you can do with a String.
@@ -72,38 +72,88 @@ public class _01_StringMethods {
     			
     			if(lastNames.get(i).compareTo((lastNames.get(indexOfCurrentBest))) < 0) {
     				indexOfCurrentBest = i;
-    				System.out.println("Test");
+    				
     			}
 		}
-    		System.out.println(lastNames);
+    		
     		return names.get(indexOfCurrentBest);
     }
 
     // Return the sum of all numerical digits in the String
     public static int numeralSum(String s) {
-        return 0;
+    	int sum = 0;
+    		for (int i = 0; i < s.length(); i++) {
+				char c = s.charAt(i);
+				if(Character.isDigit(c)) {
+					sum+=Integer.parseInt(String.valueOf(c));
+				}
+			}
+        return sum;
     }
 
     // Return the number of times String substring appears in String s
     public static int substringCount(String s, String substring) {
-        return 0;
+    	int numberOfSubstrings = 0;
+    		while(s.contains(substring)) {
+    			s = s.substring(s.indexOf(substring)+substring.length());
+    			numberOfSubstrings++;
+    		}
+    		
+        return numberOfSubstrings;
     }
 
     // Call Utilities.encrypt at the bottom of this file to encrypt String s
     public static String encrypt(String s, char key) {
-        return null;
+    		return(Utilities.encrypt(s.getBytes(), (byte)key));
     }
 
     // Call Utilities.decrypt at the bottom of this file to decrypt the
     // cyphertext (encrypted text)
     public static String decrypt(String s, char key) {
-        return null;
+    		return(Utilities.decrypt(s, (byte)key));
     }
 
     // Return the number of words in String s that end with String substring
     // You can assume there are no punctuation marks between words
     public static int wordsEndsWithSubstring(String s, String substring) {
-        return 0;
+    		int numberOfWordsEndWithSubstring = 0;
+    		ArrayList<Integer> locationOfSpaces = new ArrayList<Integer>();
+    		//ArrayList<Integer> locationOfSubstrings = new ArrayList<Integer>();
+    		int sCompleted = 0;
+    		String previousSSubstring = "suoidfoijsapokdopwqposk"; 
+    		
+    		//Save every spaces location
+    			String sCopy = s;
+    			while(sCopy.contains(" ")) {
+    				sCopy = sCopy.substring(sCopy.indexOf(" ")+1);
+    				locationOfSpaces.add(s.indexOf(sCopy));
+    			}
+    		//System.out.println(locationOfSpaces);
+    			
+    		//Save location of every substring
+    		/*	String sCopy2 = s;
+			while(sCopy2.contains(substring)) {
+				sCopy2 = sCopy2.substring(sCopy.indexOf(substring)+substring.length());
+				locationOfSubstrings.add(s.indexOf(sCopy));
+			}
+		System.out.println(locationOfSubstrings);
+    		*/
+    		
+    		//Find every substring, check for an space before using locationOfSpaces
+    			while(s.contains(substring)) {
+    				sCompleted = s.indexOf(substring)+substring.length();
+    				String sSubstring = s.substring(sCompleted);
+        			if(s.charAt(s.indexOf(sSubstring)) == ' ') {
+        				numberOfWordsEndWithSubstring++;
+        			}
+        			System.out.println("sSubstring: " + sSubstring + ", previous: " + previousSSubstring);
+        			if(sSubstring.equals(previousSSubstring)) {
+        				break;
+        			}
+        			previousSSubstring = sSubstring;
+        		}
+    			
+        return numberOfWordsEndWithSubstring;
     }
 
     // Given String s, return the number of characters between the first
@@ -117,6 +167,7 @@ public class _01_StringMethods {
     // palindromes are words or phrases are read the same forward as backward.
     // HINT: ignore/remove all punctuation and spaces in the String
     public static boolean palindrome(String s) {
+    		//for
         return true;
     }
 }
